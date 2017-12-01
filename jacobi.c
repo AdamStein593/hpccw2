@@ -44,8 +44,6 @@ void parse_arguments(int argc, char *argv[]);
 int run(float *A, float *b, float *x, float *xtmp)
 {
   int itr;
-  int row, col;
-  float diff;
   float sqdiff;
   float *ptrtmp;
   float thresh = CONVERGENCE_THRESHOLD*CONVERGENCE_THRESHOLD;
@@ -57,11 +55,11 @@ int run(float *A, float *b, float *x, float *xtmp)
   do
   {
     sqdiff = 0.0;
-    #pragma omp parallel for private(row,col)
-    for (row = 0; row < N; row++)
+    #pragma omp parallel for
+    for (int row = 0; row < N; row++)
     {
       float dot = 0.0;
-      for (col = 0; col < N; col++)
+      for (int col = 0; col < N; col++)
       {
           dot += A[row*N + col] * x[col];
       }
@@ -74,9 +72,9 @@ int run(float *A, float *b, float *x, float *xtmp)
     x      = xtmp;
     xtmp   = ptrtmp;
     //discuss increase solution error, try change to doubles
-    #pragma omp parallel for private(diff, row) reduction(+:sqdiff)
-    for (row = 0; row < N; row++) {
-      diff    = xtmp[row] - x[row];
+    #pragma omp parallel for reduction(+:sqdiff)
+    for (int row = 0; row < N; row++) {
+      float diff    = xtmp[row] - x[row];
       sqdiff += diff * diff;
     }
 
@@ -86,6 +84,7 @@ int run(float *A, float *b, float *x, float *xtmp)
 
   return itr;
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -103,8 +102,6 @@ int main(int argc, char *argv[])
   printf(SEPARATOR);
 
   double total_start = get_timestamp();
-  int row;
-  int col;
   float *randomA = malloc(N*N*sizeof(float));
   float *randomB = malloc(N*sizeof(float));
 
@@ -116,11 +113,11 @@ int main(int argc, char *argv[])
 }
   // Initialize data
   srand(SEED);
-  #pragma omp parallel for private(row,col)
-  for (row = 0; row < N; row++)
+  #pragma omp parallel for
+  for (int row = 0; row < N; row++)
   {
     float rowsum = 0.0;
-    for (col = 0; col < N; col++)
+    for (int col = 0; col < N; col++)
     {
       float value = randomA[row*N + col];
       A[row*N + col] = value;
@@ -138,11 +135,11 @@ int main(int argc, char *argv[])
 
   // Check error of final solution
   float err = 0.0;
-  #pragma omp parallel for private(row,col) reduction(+:err)
-  for (row = 0; row < N; row++)
+  #pragma omp parallel for reduction(+:err)
+  for (int row = 0; row < N; row++)
   {
     float tmp = 0.0;
-    for (col = 0; col < N; col++)
+    for (int col = 0; col < N; col++)
     {
       tmp += A[row*N + col] * x[col];
     }

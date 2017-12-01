@@ -1,49 +1,14 @@
-Running on host node31-030
-Time is Fri Dec 1 14:26:40 GMT 2017
+Running on host node31-029
+Time is Fri Dec 1 16:27:41 GMT 2017
 Directory is /panfs/panasas01/cosc/as15656/cw2
-PBS job ID is 6379257.master.cm.cluster
+PBS job ID is 6379638.master.cm.cluster
 ------------------------------------
 Matrix size:            4000x4000
 Maximum iterations:     20000
 Convergence threshold:  0.000100
 ------------------------------------
-Solution error = 0.199903
+Solution error = 0.199929
 Iterations     = 10040
-Total runtime  = 11.203206 seconds
-Solver runtime = 10.933798 seconds
+Total runtime  = 7.970788 seconds
+Solver runtime = 7.806223 seconds
 ------------------------------------
-
-amplxe: Warning: Cannot locate debugging symbols for file `/lib64/libdl-2.12.so'.
-amplxe: Warning: Cannot locate debugging symbols for file `/lib64/ld-2.12.so'.
-amplxe: Warning: Cannot locate debugging symbols for file `/lib64/libpthread-2.12.so'.
-amplxe: Warning: Cannot locate debugging symbols for file `/cm/shared/apps/intel-cluster-studio/vtune_amplifier_xe_2015.2.0.393444/lib64/runtime/libittnotify_collector.so'.
-
-amplxe: Warning: Cannot locate debugging symbols for file `/lib64/libc-2.12.so'.
-amplxe: Warning: Cannot locate debugging symbols for file `/cm/shared/apps/intel-cluster-studio/vtune_amplifier_xe_2015.2.0.393444/lib64/libtpsstool.so'.
-
-
-
-Collection and Platform Info
-----------------------------
-Parameter                 r001hs                                                         
-------------------------  ---------------------------------------------------------------
-Application Command Line  ./jacobi "--norder" "4000" "--iterations" "20000"              
-Operating System          2.6.32-642.6.2.el6.x86_64 Scientific Linux release 6.4 (Carbon)
-Computer Name             node31-030                                                     
-Result Size               19764235                                                       
-Collection start time     14:26:41 01/12/2017 UTC                                        
-Collection stop time      14:26:53 01/12/2017 UTC                                        
-
-CPU
----
-Parameter          r001hs                       
------------------  -----------------------------
-Name               Intel(R) Xeon(R) E5 processor
-Frequency          2600000589                   
-Logical CPU Count  16                           
-
-Summary
--------
-Elapsed Time:       11.436 
-CPU Time:           117.070
-Average CPU Usage:  9.608  

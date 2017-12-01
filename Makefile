@@ -1,5 +1,5 @@
 CC = icc
-CFLAGS = -std=c99 -Wall -O2 -g -Ofast -unroll4 -simd -qopenmp
+CFLAGS = -std=c99 -Wall -O3 -qopenmp
 LDFLAGS = -lm
 
 jacobi: jacobi.c
