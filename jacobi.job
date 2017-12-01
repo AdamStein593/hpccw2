@@ -16,6 +16,9 @@ echo Directory is `pwd`
 echo PBS job ID is $PBS_JOBID
 
 export KPM_AFFINITY= compact
+export OMP_WAIT_POLICY=active
+export KMP_BLOCKTIME=0
+export OMP_DYNAMIC=1
 
-./jacobi --norder 4000 --iterations 20000
+amplxe-cl -quiet -collect hotspots -result-dir r001hs ./jacobi --norder 4000 --iterations 20000
 

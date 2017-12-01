@@ -57,8 +57,6 @@ int run(float *A, float *b, float *x, float *xtmp)
   do
   {
     sqdiff = 0.0;
-    // Perfom Jacobi iteration
-    //#pragma unroll_and_jam(4)
     #pragma omp parallel for private(row,col)
     for (row = 0; row < N; row++)
     {
@@ -76,7 +74,6 @@ int run(float *A, float *b, float *x, float *xtmp)
     x      = xtmp;
     xtmp   = ptrtmp;
     //discuss increase solution error, try change to doubles
-    //#pragma unroll_and_jam(4)
     #pragma omp parallel for private(diff, row) reduction(+:sqdiff)
     for (row = 0; row < N; row++) {
       diff    = xtmp[row] - x[row];
@@ -108,7 +105,15 @@ int main(int argc, char *argv[])
   double total_start = get_timestamp();
   int row;
   int col;
+  float *randomA = malloc(N*N*sizeof(float));
+  float *randomB = malloc(N*sizeof(float));
 
+  for(int row = 0; row < N; row++){
+      for(int col = 0; col < N; col++){
+	 randomA[row*N + col] = rand()/(float)RAND_MAX;
+      }
+      randomB[row] = rand()/(float)RAND_MAX;
+}
   // Initialize data
   srand(SEED);
   #pragma omp parallel for private(row,col)
@@ -117,12 +122,12 @@ int main(int argc, char *argv[])
     float rowsum = 0.0;
     for (col = 0; col < N; col++)
     {
-      float value = rand()/(float)RAND_MAX;
+      float value = randomA[row*N + col];
       A[row*N + col] = value;
       rowsum += value;
     }
     A[row + row*N] += rowsum;
-    b[row] = rand()/(float)RAND_MAX;
+    b[row] = randomB[row];
     x[row] = 0.0;
   }
 

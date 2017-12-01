@@ -1,0 +1,16 @@
+-r
+/panfs/panasas01/cosc/as15656/cw2/r001hs
+--data-limit-mb=500
+--stack-stitching
+--follow-child
+--itt-config=frame
+--stackwalk=offline
+--type=cpu:counters:nostack
+--type=cpu:stack
+--interval=10
+--
+./jacobi
+--norder
+4000
+--iterations
+20000
