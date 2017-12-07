@@ -1,0 +1,14 @@
+Running on host node31-033
+Time is Wed Dec 6 11:13:06 GMT 2017
+Directory is /panfs/panasas01/cosc/as15656/cw2
+PBS job ID is 6397535.master.cm.cluster
+------------------------------------
+Matrix size:            500x500
+Maximum iterations:     20000
+Convergence threshold:  0.000100
+------------------------------------
+Solution error = 0.024951
+Iterations     = 1465
+Total runtime  = 0.029153 seconds
+Solver runtime = 0.023708 seconds
+------------------------------------

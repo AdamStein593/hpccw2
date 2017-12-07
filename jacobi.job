@@ -17,9 +17,8 @@ echo PBS job ID is $PBS_JOBID
 
 export KMP_AFFINITY=compact
 export OMP_WAIT_POLICY=active
-export KMP_BLOCKTIME=0
-export OMP_DYNAMIC=1
 export OMP_NUM_THREADS=16
+
 #amplxe-cl -quiet -collect hotspots -result-dir r001hs 
 ./jacobi --norder 4000 --iterations 20000
 
